@@ -104,11 +104,11 @@ $produtos = getProduto();
             <?php foreach ($produtos as $produto): ?>
             <tr>
                 <td><?php echo $produto['id']; ?></td>
-                <td><?php echo $produto['produto']; ?></td>
-                <td><?php echo $produto['preco']; ?></td>
-                <td><?php echo $produto['tipo']; ?></td>
+                <td><?php echo $produto['Produto']; ?></td>
+                <td><?php echo $produto['Preco']; ?></td>
+                <td><?php echo $produto['Tipo']; ?></td>
                 <td>
-                    <a href="?acao=editar&id=<?php echo $produto['id']; ?>&nome=<?php echo urlencode($produto['produto']); ?>&preco=<?php echo urlencode($produto['preco']); ?>&tipo=<?php echo urlencode($produto['tipo']); ?>" class="btn btn-primary">Editar</a>
+                    <a href="?acao=editar&id=<?php echo $produto['id']; ?>&Produto=<?php echo urlencode($produto['Produto']); ?>&Preco=<?php echo urlencode($produto['Preco']); ?>&Tipo=<?php echo urlencode($produto['Tipo']); ?>" class="btn btn-primary">Editar</a>
                     <a href="?acao=excluir&id=<?php echo $produto['id']; ?>" class="btn btn-danger">Excluir</a>
                 </td>
             </tr>

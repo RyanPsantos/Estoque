@@ -92,9 +92,9 @@ if ($resultProduto->num_rows == 0) {
  
 
 $produto = $resultProduto->fetch_assoc();
-$produtoOriginal = $produto['produto'];
-$precoOriginal = $produto['preco'];
-$tipoOriginal = $produto['tipo'];
+$produtoOriginal = $produto['Produto'];
+$precoOriginal = $produto['Preco'];
+$tipoOriginal = $produto['Tipo'];
 
 // Fechar a conexão com o banco de dados
 $bd->close();
@@ -112,7 +112,7 @@ echo $id;
             integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
             crossorigin="anonymous">
         <link rel="stylesheet" href="css/style.css">
-        <title>Editar Contato</title>
+        <title>Editar Estoque</title>
     </head>
     <body>
         <div class="conteudo">
@@ -125,7 +125,7 @@ echo $id;
                         type="text"
                         id="novo_nome"
                         name="novo_nome"
-                        value="<?php echo ($nomeOriginal); ?>"
+                        value="<?php echo ($produtoOriginal); ?>"
                         required="required">
                     <label for="novo_nome" class="lbl_titulo">Produto:</label>
                 </div>
@@ -135,7 +135,7 @@ echo $id;
                         type="text"
                         id="novo_telefone"
                         name="novo_telefone"
-                        value="<?php echo ($telefoneOriginal); ?>"
+                        value="<?php echo ($precoOriginal); ?>"
                         required="required">
                     <label for="novo_telefone" class="lbl_titulo">Preço:</label>
                 </div>
@@ -145,7 +145,7 @@ echo $id;
                         type="email"
                         id="novo_email"
                         name="novo_email"
-                        value="<?php echo($emailOriginal); ?>"
+                        value="<?php echo($tipoOriginal); ?>"
                         required="required">
                     <label for="novo_email" class="lbl_titulo">Tipo:</label>
                 </div>
