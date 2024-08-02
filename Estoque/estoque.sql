@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `controle_estoque` (
-  `Id` int(11) NOT NULL,
+  `id` int(11) NOT NULL,
   `Produto` varchar(200) NOT NULL,
   `Preco` varchar(10) NOT NULL,
   `Tipo` varchar(200) NOT NULL
@@ -42,7 +42,7 @@ CREATE TABLE `controle_estoque` (
 -- Índices para tabela `controle_estoque`
 --
 ALTER TABLE `controle_estoque`
-  ADD PRIMARY KEY (`Id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT de tabelas despejadas
@@ -52,7 +52,7 @@ ALTER TABLE `controle_estoque`
 -- AUTO_INCREMENT de tabela `controle_estoque`
 --
 ALTER TABLE `controle_estoque`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
