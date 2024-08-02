@@ -1,62 +1,62 @@
 <?php
-$bd = new mysqli('localhost', 'root', '', 'agenda');
+$bd = new mysqli('localhost', 'root', '', 'estoque');
 
-function getContatos() {
+function getProduto() {
     global $bd;
-    $sql = "SELECT * FROM contatos";
+    $sql = "SELECT * FROM controle_estoque";
     $resultado = $bd->query($sql);
-    $contatos = [];
+    $produtos = [];
     while ($row = $resultado->fetch_assoc()) {
-        $contatos[] = $row;
+        $produtos[] = $row;
     }
-    return $contatos;
+    return $produtos;
 }
 // criei uma nova function adicionarContato
-function adicionarContato($produto, $preco, $tipo) {
+function adicionarProduto($produto, $preco, $tipo) {
     global $bd;
-    $sql = "INSERT INTO contatos (produto, preco, tipo) VALUES ('$produto', '$preco', '$tipo')"; 
+    $sql = "INSERT INTO controle_estoque (produto, preco, tipo) VALUES ('$produto', '$preco', '$tipo')"; 
     $bd->query($sql);
 }
 
 // Criei uma nova function excluirContato
-function excluirContato($id) {
+function excluirProduto($id) {
     global $bd;
-    $sql = "DELETE FROM contatos WHERE id = $id";
+    $sql = "DELETE FROM controle_estoque WHERE id = $id";
     $bd->query($sql);
 }
 
-// Criei uma nova function editarContato
-function editarContato($id, $produto, $preco, $tipo) {
+// Criei uma nova function editarProduto
+function editarProduto($id, $produto, $preco, $tipo) {
     global $bd;
-    $sql = "UPDATE contatos SET produto = '$produto', preco = '$preco', tipo = '$tipo' WHERE id = $id";
+    $sql = "UPDATE controle_estoque SET produto = '$produto', preco = '$preco', tipo = '$tipo' WHERE id = $id";
     $bd->query($sql);
 }
 
 $acao = isset($_GET['acao']) ? $_GET['acao'] : null;
 $id = isset($_GET['id']) ? intval($_GET['id']) : 10;
-$nome = isset($_POST['produto']) ? $_POST['produto'] : '';
-$telefone = isset($_POST['preco']) ? $_POST['preco'] : '';
-$email = isset($_POST['tipo']) ? $_POST['tipo'] : '';
+$produto = isset($_POST['produto']) ? $_POST['produto'] : '';
+$preco = isset($_POST['preco']) ? $_POST['preco'] : '';
+$tipo = isset($_POST['tipo']) ? $_POST['tipo'] : '';
 
 if ($acao === 'adicionar') {
-    adicionarContato($produto, $preco, $tipo); //utilizei a nova function criada 
-    header('Location: agenda.php'); // mudei para agenda.php
+    adicionarProduto($produto, $preco, $tipo); //utilizei a nova function criada 
+    header('Location: estoque.php'); // mudei para estoque.php
     exit();
 } elseif ($acao === 'editar') {
     $id = intval($_GET['id']);
     $produto = $_POST['produto'];
     $preco = $_POST['preco'];
     $tipo = $_POST['tipo'];
-    // editarContato($id, $nome, $telefone, $email); // utilizei a nova function criada
-    header("Location: editagenda.php?id=$id&produto=" . urlencode($produto) . "&preco=" . urlencode($preco) . "&tipo=" . urlencode($tipo));
+    // editarProduto($id, $nome, $telefone, $email); // utilizei a nova function criada
+    header("Location: editarestoque.php?id=$id&produto=" . urlencode($produto) . "&preco=" . urlencode($preco) . "&tipo=" . urlencode($tipo));
     exit();
 } elseif ($acao === 'excluir') {
-    excluirContato($id); // utilizei a nova function criada 
-    header('Location: agenda.php');
+    excluirProduto($id); // utilizei a nova function criada 
+    header('Location: estoque.php');
     exit();
 }
 
-$contatos = getContatos();
+$produtos = getProduto();
 ?>
 
 <!DOCTYPE html>
@@ -97,7 +97,7 @@ $contatos = getContatos();
                 <th scope="col">Produto</th>
                 <th scope="col">Preço</th>
                 <th scope="col">Tipo</th>
-                <th scope="col">Editarw</th>
+                <th scope="col">Editar</th>
             </tr>
         </thead>
         <tbody>

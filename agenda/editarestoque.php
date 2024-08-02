@@ -1,5 +1,5 @@
 <?php
-$bd = new mysqli('localhost', 'root', '', 'agenda');
+$bd = new mysqli('localhost', 'root', '', 'estoque');
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = isset($_POST['id']) ? $_POST['id'] : null;
@@ -11,15 +11,15 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $novoProduto = filter_var($novoProduto, FILTER_SANITIZE_STRING);
 
         if ($novoProduto === '') {
-            echo "Erro: Novo nome não pode ser vazio.";
+            echo "Erro: Novo produto não pode ser vazio.";
             exit();
         }
 
-        $sqlUpdateproduto = "UPDATE contatos SET nome = '$novoProduto' WHERE id = '$id'";
+        $sqlUpdateproduto = "UPDATE controle_estoque SET Produto = '$novoProduto' WHERE id = '$id'";
         $resultUpdateProduto = $bd->query($sqlUpdateProduto);
 
         if ($resultUpdateProduto === false) {
-            echo "Erro: Falha ao atualizar o nome.";
+            echo "Erro: Falha ao atualizar o produto.";
             exit();
         }
     }
@@ -30,40 +30,40 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         $novoPreco = filter_var($novoPreco, FILTER_SANITIZE_STRING);
 
         if ($novoPreco === '') {
-            echo "Erro: Novo telefone não pode ser vazio.";
+            echo "Erro: Novo preço não pode ser vazio.";
             exit();
         }
 
-        $sqlUpdateTelefone = "UPDATE contatos SET telefone = '$novoTelefone' WHERE id = '$id'";
-        $resultUpdateTelefone = $bd->query($sqlUpdateTelefone);
+        $sqlUpdatePreco = "UPDATE controle_estoque SET Preco = '$novoPreco' WHERE id = '$id'";
+        $resultUpdatePreco = $bd->query($sqlUpdatePreco);
 
-        if ($resultUpdateTelefone === false) {
-            echo "Erro: Falha ao atualizar o telefone.";
+        if ($resultUpdatePreco === false) {
+            echo "Erro: Falha ao atualizar o preço.";
             exit();
         }
     }
 
     // Atualizar o email, se o novo email foi recebido
-    if (isset($_POST['novo_email'])) {
-        $novoEmail = trim($_POST['novo_email']);
-        $novoEmail = filter_var($novoEmail, FILTER_SANITIZE_EMAIL);
+    if (isset($_POST['novo_tipo'])) {
+        $novoTipo = trim($_POST['novo_tipo']);
+        $novoTipo = filter_var($novoTipo, FILTER_SANITIZE_EMAIL);
 
-        if (!filter_var($novoEmail, FILTER_VALIDATE_EMAIL)) {
-            echo "Erro: Email inválido.";
+        if (!filter_var($novoTipo, FILTER_VALIDATE_EMAIL)) {
+            echo "Erro: Novo tipo não pode ser vazio.";
             exit();
         }
 
-        $sqlUpdateEmail = "UPDATE contatos SET email = '$novoEmail' WHERE id = '$id'";
-        $resultUpdateEmail = $bd->query($sqlUpdateEmail);
+        $sqlUpdateTipo = "UPDATE controle_estoque SET Tipo = '$novoTipo' WHERE id = '$id'";
+        $resultUpdateTipo = $bd->query($sqlUpdateTipo);
 
-        if ($resultUpdateEmail === false) {
-            echo "Erro: Falha ao atualizar o email.";
+        if ($resultUpdateTipo === false) {
+            echo "Erro: Falha ao atualizar o tipo.";
             exit();
         }
     }
 
     // Redirecionar após a atualização
-    header('Location: agenda.php');
+    header('Location: estoque.php');
     exit();
 }
 
@@ -81,20 +81,20 @@ if (isset($_GET['id'])) {
 }
 
 // Buscar o nome, telefone e email atuais do contato
-$sqlContato = "SELECT nome, telefone, email FROM contatos WHERE id = $id";
-$resultContato = $bd->query($sqlContato);
+$sqlProduto = "SELECT Produto, Preco, Tipo FROM controle_estoque WHERE id = $id";
+$resultProduto = $bd->query($sqlProduto);
 
-if ($resultContato->num_rows == 0) {
-    echo "Erro: Contato não encontrado no banco de dados.";
+if ($resultProduto->num_rows == 0) {
+    echo "Erro: Estoque não encontrado no banco de dados.";
     exit();
 }
 
  
 
-$contato = $resultContato->fetch_assoc();
-$nomeOriginal = $contato['nome'];
-$telefoneOriginal = $contato['telefone'];
-$emailOriginal = $contato['email'];
+$produto = $resultProduto->fetch_assoc();
+$produtoOriginal = $produto['produto'];
+$precoOriginal = $produto['preco'];
+$tipoOriginal = $produto['tipo'];
 
 // Fechar a conexão com o banco de dados
 $bd->close();
