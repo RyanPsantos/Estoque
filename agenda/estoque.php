@@ -73,16 +73,16 @@ $produtos = getProduto();
     
     <form action="?acao=adicionar" method="post" novalidate="novalidate">
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="nome" name="nome" placeholder="Nome do produto" required="required">
-            <label for="nome" class="lbl_titulo">Nome do Produto</label>
+            <input type="text" class="form-control" id="produto" name="produto" placeholder="Nome do produto" required="required">
+            <label for="produto" class="lbl_titulo">Nome do Produto</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="telefone" name="telefone" placeholder="Preço" required="required">
-            <label for="telefone" class="lbl_titulo">Precificação:</label>
+            <input type="text" class="form-control" id="preco" name="preco" placeholder="Preço" required="required">
+            <label for="preco" class="lbl_titulo">Precificação:</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="email" class="form-control" id="email" name="email" placeholder="Email" required="required">
-            <label for="email" class="lbl_titulo">Tipo do Produto</label>
+            <input type="text" class="form-control" id="tipo" name="tipo" placeholder="Tipo" required="required">
+            <label for="tipo" class="lbl_titulo">Tipo do Produto</label>
         </div>
         <div class="col-md-4">
             <button type="submit" class="btn btn-primary" id="botao">Adicionar produto</button>
@@ -101,15 +101,15 @@ $produtos = getProduto();
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($contatos as $contato): ?>
+            <?php foreach ($produtos as $produto): ?>
             <tr>
-                <td><?php echo $contato['id']; ?></td>
-                <td><?php echo $contato['nome']; ?></td>
-                <td><?php echo $contato['telefone']; ?></td>
-                <td><?php echo $contato['email']; ?></td>
+                <td><?php echo $produto['id']; ?></td>
+                <td><?php echo $produto['produto']; ?></td>
+                <td><?php echo $produto['preco']; ?></td>
+                <td><?php echo $produto['tipo']; ?></td>
                 <td>
-                    <a href="?acao=editar&id=<?php echo $contato['id']; ?>&nome=<?php echo urlencode($contato['nome']); ?>&telefone=<?php echo urlencode($contato['telefone']); ?>&email=<?php echo urlencode($contato['email']); ?>" class="btn btn-primary">Editar</a>
-                    <a href="?acao=excluir&id=<?php echo $contato['id']; ?>" class="btn btn-danger">Excluir</a>
+                    <a href="?acao=editar&id=<?php echo $produto['id']; ?>&nome=<?php echo urlencode($produto['produto']); ?>&preco=<?php echo urlencode($produto['preco']); ?>&tipo=<?php echo urlencode($produto['tipo']); ?>" class="btn btn-primary">Editar</a>
+                    <a href="?acao=excluir&id=<?php echo $produto['id']; ?>" class="btn btn-danger">Excluir</a>
                 </td>
             </tr>
             <?php endforeach; ?>
