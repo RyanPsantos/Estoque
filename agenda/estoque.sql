@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 24-Maio-2024 às 02:40
+-- Tempo de geração: 02-Ago-2024 às 01:25
 -- Versão do servidor: 10.4.27-MariaDB
 -- versão do PHP: 8.2.0
 
@@ -18,52 +18,41 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Banco de dados: `agenda`
+-- Banco de dados: `estoque`
 --
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `contatos`
+-- Estrutura da tabela `controle_estoque`
 --
-CREATE DATABASE agenda;
-USE agenda;
-CREATE TABLE `contatos` (
-  `id` int(11) NOT NULL,
-  `nome` varchar(255) NOT NULL,
-  `telefone` int(255) NOT NULL,
-  `email` varchar(255) NOT NULL
+
+CREATE TABLE `controle_estoque` (
+  `Id` int(11) NOT NULL,
+  `Produto` varchar(200) NOT NULL,
+  `Preco` varchar(10) NOT NULL,
+  `Tipo` varchar(200) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Extraindo dados da tabela `contatos`
---
-
-INSERT INTO `contatos` (`id`, `nome`, `telefone`, `email`) VALUES
-(1, 'ryan', 2921, 'tantofaz@gmail.com'),
-(2, 'ryan', 2921, 'tantofaz@gmail.com'),
-(3, 'aaaa', 232, 'eyeye@gmail.com');
-(5, 'yvisom', 25482518, 'gmail@gmail.com');
 
 --
 -- Índices para tabelas despejadas
 --
 
 --
--- Índices para tabela `contatos`
+-- Índices para tabela `controle_estoque`
 --
-ALTER TABLE `contatos`
-  ADD PRIMARY KEY (`id`);
+ALTER TABLE `controle_estoque`
+  ADD PRIMARY KEY (`Id`);
 
 --
 -- AUTO_INCREMENT de tabelas despejadas
 --
 
 --
--- AUTO_INCREMENT de tabela `contatos`
+-- AUTO_INCREMENT de tabela `controle_estoque`
 --
-ALTER TABLE `contatos`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+ALTER TABLE `controle_estoque`
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
