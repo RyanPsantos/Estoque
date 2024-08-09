@@ -8,6 +8,7 @@ if ($bd->connect_error) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = isset($_POST['id']) ? intval($_POST['id']) : null;
+    echo $id;
 
     if (isset($_POST['novo_produto'])) {
         $novoProduto = trim($_POST['novo_produto']);
@@ -18,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
 
-        $sqlUpdateProduto = "UPDATE controle_estoque SET produto = ? WHERE id = ?";
+        $sqlUpdateProduto = "UPDATE controle_estoque SET Produto = ? WHERE Id = ?";
         $stmtUpdateProduto = $bd->prepare($sqlUpdateProduto);
         $stmtUpdateProduto->bind_param('si', $novoProduto, $id);
         $stmtUpdateProduto->execute();
@@ -38,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
 
-        $sqlUpdatePreco = "UPDATE controle_estoque SET preco = ? WHERE id = ?";
+        $sqlUpdatePreco = "UPDATE controle_estoque SET Preco = ? WHERE Id = ?";
         $stmtUpdatePreco = $bd->prepare($sqlUpdatePreco);
         $stmtUpdatePreco->bind_param('si', $novoPreco, $id);
         $stmtUpdatePreco->execute();
@@ -58,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
 
-        $sqlUpdateTipo = "UPDATE controle_estoque SET tipo = ? WHERE id = ?";
+        $sqlUpdateTipo = "UPDATE controle_estoque SET Tipo = ? WHERE Id = ?";
         $stmtUpdateTipo = $bd->prepare($sqlUpdateTipo);
         $stmtUpdateTipo->bind_param('si', $novoTipo, $id);
         $stmtUpdateTipo->execute();
@@ -75,15 +76,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Verificar se o ID foi recebido e validar como inteiro
-$id = isset($_GET['id']) ? intval($_GET['id']) : null;
-
-if ($id === null) {
+if (isset($_GET['id'])) {
+    $id = intval($_GET['id']);
+} else {
     echo "Erro: ID não recebido.";
     exit();
 }
 
 
-$sqlEstoque = "SELECT produto, preco, tipo FROM controle_estoque WHERE id = ?";
+$sqlEstoque = "SELECT Produto, Preco, Tipo FROM controle_estoque WHERE Id = ?";
 $stmtEstoque = $bd->prepare($sqlEstoque);
 $stmtEstoque->bind_param('i', $id);
 $stmtEstoque->execute();
@@ -95,9 +96,9 @@ if ($resultEstoque->num_rows === 0) {
 }
 
 $estoque = $resultEstoque->fetch_assoc();
-$produtoOriginal = $estoque['produto'];
-$precoOriginal = $estoque['preco'];
-$tipoOriginal = $estoque['tipo'];
+$produtoOriginal = $estoque['Produto'];
+$precoOriginal = $estoque['Preco'];
+$tipoOriginal = $estoque['Tipo'];
 
 // Fechar a conexão com o banco de dados
 $bd->close();
