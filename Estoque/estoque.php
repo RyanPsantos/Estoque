@@ -1,62 +1,66 @@
 <?php
 $bd = new mysqli('localhost', 'root', '', 'estoque');
 
-function getProduto() {
+function getEstoque() {
     global $bd;
     $sql = "SELECT * FROM controle_estoque";
     $resultado = $bd->query($sql);
-    $produtos = [];
+    $estoque = [];
     while ($row = $resultado->fetch_assoc()) {
-        $produtos[] = $row;
+        $estoque[] = $row;
     }
-    return $produtos;
+    return $estoque;
 }
-// criei uma nova function adicionarContato
-function adicionarProduto($produto, $preco, $tipo) {
+
+// Função para adicionar um item ao estoque
+function adicionarEstoque($produto, $preco, $tipo) {
     global $bd;
-    $sql = "INSERT INTO controle_estoque (produto, preco, tipo) VALUES ('$produto', '$preco', '$tipo')"; 
+    $sql = "INSERT INTO controle_estoque (produto, preco, tipo) VALUES ('$produto', '$preco', '$tipo')";
     $bd->query($sql);
 }
 
-// Criei uma nova function excluirContato
-function excluirProduto($id) {
+// Função para excluir um item do estoque
+function excluirEstoque($id) {
     global $bd;
-    $sql = "DELETE FROM controle_estoque WHERE id = $id";
+    $sql = "DELETE FROM controle_estoque WHERE Id = $id";
     $bd->query($sql);
 }
 
-// Criei uma nova function editarProduto
-function editarProduto($id, $produto, $preco, $tipo) {
+// Função para editar um item do estoque
+function editarEstoque($id, $produto, $preco, $tipo) {
     global $bd;
-    $sql = "UPDATE controle_estoque SET produto = '$produto', preco = '$preco', tipo = '$tipo' WHERE id = $id";
+    $sql = "UPDATE controle_estoque SET Produto = '$produto', Preco = '$preco', Tipo = '$tipo' WHERE Id = $id";
     $bd->query($sql);
 }
 
 $acao = isset($_GET['acao']) ? $_GET['acao'] : null;
-$id = isset($_GET['id']) ? intval($_GET['id']) : 10;
+$id = isset($_GET['id']) ? intval($_GET['id']) : null;
 $produto = isset($_POST['produto']) ? $_POST['produto'] : '';
 $preco = isset($_POST['preco']) ? $_POST['preco'] : '';
 $tipo = isset($_POST['tipo']) ? $_POST['tipo'] : '';
 
 if ($acao === 'adicionar') {
-    adicionarProduto($produto, $preco, $tipo); //utilizei a nova function criada 
-    header('Location: estoque.php'); // mudei para estoque.php
-    exit();
-} elseif ($acao === 'editar') {
-    $id = intval($_GET['id']);
-    $produto = $_POST['produto'];
-    $preco = $_POST['preco'];
-    $tipo = $_POST['tipo'];
-    // editarProduto($id, $nome, $telefone, $email); // utilizei a nova function criada
-    header("Location: editarestoque.php?id=$id&produto=" . urlencode($produto) . "&preco=" . urlencode($preco) . "&tipo=" . urlencode($tipo));
-    exit();
-} elseif ($acao === 'excluir') {
-    excluirProduto($id); // utilizei a nova function criada 
+    adicionarEstoque($produto, $preco, $tipo);
     header('Location: estoque.php');
     exit();
+} elseif ($acao === 'editar') {
+    if ($id !== null) {
+        $produto = $_POST['produto'];
+        $preco = $_POST['preco'];
+        $tipo = $_POST['tipo'];
+        editarEstoque($id, $produto, $preco, $tipo);
+        header("Location: editaestoque.php?id=$id&produto=" . urlencode($produto) . "&preco=" . urlencode($preco) . "&tipo=" . urlencode($tipo));
+        exit();
+    }
+} elseif ($acao === 'excluir') {
+    if ($id !== null) {
+        excluirEstoque($id);
+        header('Location: estoque.php');
+        exit();
+    }
 }
 
-$produtos = getProduto();
+$estoque = getEstoque();
 ?>
 
 <!DOCTYPE html>
@@ -77,8 +81,8 @@ $produtos = getProduto();
             <label for="produto" class="lbl_titulo">Nome do Produto</label>
         </div>
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="preco" name="preco" placeholder="Preço" required="required">
-            <label for="preco" class="lbl_titulo">Precificação:</label>
+            <input type="text" class="form-control" id="preco" name="preco" placeholder="Preco" required="required">
+            <label for="preco" class="lbl_titulo">Preço:</label>
         </div>
         <div class="form-floating mb-3">
             <input type="text" class="form-control" id="tipo" name="tipo" placeholder="Tipo" required="required">
@@ -101,18 +105,19 @@ $produtos = getProduto();
             </tr>
         </thead>
         <tbody>
-            <?php foreach ($produtos as $produto): ?>
-            <tr>
-                <td><?php echo $produto['id']; ?></td>
-                <td><?php echo $produto['Produto']; ?></td>
-                <td><?php echo $produto['Preco']; ?></td>
-                <td><?php echo $produto['Tipo']; ?></td>
-                <td>
-                    <a href="?acao=editar&id=<?php echo $produto['id']; ?>&Produto=<?php echo urlencode($produto['Produto']); ?>&Preco=<?php echo urlencode($produto['Preco']); ?>&Tipo=<?php echo urlencode($produto['Tipo']); ?>" class="btn btn-primary">Editar</a>
-                    <a href="?acao=excluir&id=<?php echo $produto['id']; ?>" class="btn btn-danger">Excluir</a>
-                </td>
-            </tr>
-            <?php endforeach; ?>
+        <?php foreach ($estoque as $item): ?>
+    <tr>
+        <td><?php echo $item['Id']; ?></td>
+        <td><?php echo $item['Produto']; ?></td>
+        <td><?php echo $item['Preco']; ?></td>
+        <td><?php echo $item['Tipo']; ?></td>
+        <td>
+            <a href="?acao=editar&id=<?php echo urlencode($item['Id']); ?>&produto=<?php echo urlencode($item['Produto']); ?>&preco=<?php echo urlencode($item['Preco']); ?>&tipo=<?php echo urlencode($item['Tipo']); ?>" class="btn btn-primary">Editar</a>
+            <a href="?acao=excluir&id=<?php echo urlencode($item['Id']); ?>" class="btn btn-danger">Excluir</a>
+        </td>
+    </tr>
+<?php endforeach; ?>
+
         </tbody>
     </table>
     </div>

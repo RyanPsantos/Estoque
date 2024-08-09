@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
 
-        $sqlUpdateProduto = "UPDATE estoque SET produto = ? WHERE id = ?";
+        $sqlUpdateProduto = "UPDATE controle_estoque SET produto = ? WHERE id = ?";
         $stmtUpdateProduto = $bd->prepare($sqlUpdateProduto);
         $stmtUpdateProduto->bind_param('si', $novoProduto, $id);
         $stmtUpdateProduto->execute();
@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
 
-        $sqlUpdatePreco = "UPDATE estoque SET preco = ? WHERE id = ?";
+        $sqlUpdatePreco = "UPDATE controle_estoque SET preco = ? WHERE id = ?";
         $stmtUpdatePreco = $bd->prepare($sqlUpdatePreco);
         $stmtUpdatePreco->bind_param('si', $novoPreco, $id);
         $stmtUpdatePreco->execute();
@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
 
-        $sqlUpdateTipo = "UPDATE estoque SET tipo = ? WHERE id = ?";
+        $sqlUpdateTipo = "UPDATE controle_estoque SET tipo = ? WHERE id = ?";
         $stmtUpdateTipo = $bd->prepare($sqlUpdateTipo);
         $stmtUpdateTipo->bind_param('si', $novoTipo, $id);
         $stmtUpdateTipo->execute();
@@ -82,8 +82,8 @@ if ($id === null) {
     exit();
 }
 
-// Buscar o nome, telefone e email atuais do contato
-$sqlEstoque = "SELECT produto, preco, tipo FROM estoque WHERE id = ?";
+
+$sqlEstoque = "SELECT produto, preco, tipo FROM controle_estoque WHERE id = ?";
 $stmtEstoque = $bd->prepare($sqlEstoque);
 $stmtEstoque->bind_param('i', $id);
 $stmtEstoque->execute();
@@ -119,14 +119,14 @@ $bd->close();
     <div class="conteudo">
         <h1 class="text-info bg-dark">Editar Produto</h1>
         <form method="post" novalidate="novalidate">
-            <input type="hidden" name="id" value="<?php echo htmlspecialchars($id); ?>">
+            <input type="hidden" name="id" value="<?php echo ($id);?>">
             <div class="form-floating mb-3">
                 <input
                     class="form-control"
                     type="text"
                     id="novo_produto"
                     name="novo_produto"
-                    value="<?php echo htmlspecialchars($produtoOriginal); ?>"
+                    value="<?php echo ($produtoOriginal);?>"
                     required="required">
                 <label for="novo_produto" class="lbl_titulo">Produto:</label>
             </div>
@@ -136,7 +136,7 @@ $bd->close();
                     type="text"
                     id="novo_preco"
                     name="novo_preco"
-                    value="<?php echo htmlspecialchars($precoOriginal); ?>"
+                    value="<?php echo ($precoOriginal);?>"
                     required="required">
                 <label for="novo_preco" class="lbl_titulo">Preço:</label>
             </div>
@@ -146,7 +146,7 @@ $bd->close();
                     type="text"
                     id="novo_tipo"
                     name="novo_tipo"
-                    value="<?php echo htmlspecialchars($tipoOriginal); ?>"
+                    value="<?php echo ($tipoOriginal);?>"
                     required="required">
                 <label for="novo_tipo" class="lbl_titulo">Tipo:</label>
             </div>
