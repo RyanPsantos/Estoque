@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmtUpdateProduto->bind_param('si', $novoProduto, $id);
         $stmtUpdateProduto->execute();
 
-        if ($stmtUpdateProduto->affected_rows === 0) {
+        if ($stmtUpdateProduto === false) {
             echo "Erro: Falha ao atualizar o produto.";
             exit();
         }
@@ -44,7 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmtUpdatePreco->bind_param('si', $novoPreco, $id);
         $stmtUpdatePreco->execute();
 
-        if ($stmtUpdatePreco->affected_rows === 0) {
+        if ($stmtUpdatePreco === false) {
             echo "Erro: Falha ao atualizar o preço.";
             exit();
         }
@@ -64,7 +64,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmtUpdateTipo->bind_param('si', $novoTipo, $id);
         $stmtUpdateTipo->execute();
 
-        if ($stmtUpdateTipo->affected_rows === 0) {
+        if ($stmtUpdateTipo->affected_rows === false) {
             echo "Erro: Falha ao atualizar o tipo do produto.";
             exit();
         }
@@ -120,7 +120,7 @@ $bd->close();
     <div class="conteudo">
         <h1 class="text-info bg-dark">Editar Produto</h1>
         <form method="post" novalidate="novalidate">
-            <input type="hidden" name="id" value="<?php echo ($id);?>">
+            <input type="hidden" name="id" id="id" value="<?php echo $id;?>">
             <div class="form-floating mb-3">
                 <input
                     class="form-control"

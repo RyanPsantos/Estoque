@@ -1,15 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 02-Ago-2024 às 01:25
--- Versão do servidor: 10.4.27-MariaDB
--- versão do PHP: 8.2.0
-
-Create database estoque;
-use estoque;
-
+-- Tempo de geração: 13/08/2024 às 04:59
+-- Versão do servidor: 10.4.32-MariaDB
+-- Versão do PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,7 +24,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `controle_estoque`
+-- Estrutura para tabela `controle_estoque`
 --
 
 CREATE TABLE `controle_estoque` (
@@ -43,24 +39,22 @@ CREATE TABLE `controle_estoque` (
 --
 
 --
--- Índices para tabela `controle_estoque`
+-- Índices de tabela `controle_estoque`
 --
 ALTER TABLE `controle_estoque`
   ADD PRIMARY KEY (`Id`);
 
 --
--- AUTO_INCREMENT de tabelas despejadas
+-- AUTO_INCREMENT para tabelas despejadas
 --
 
 --
 -- AUTO_INCREMENT de tabela `controle_estoque`
 --
 ALTER TABLE `controle_estoque`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-
-select * from controle_estoque;

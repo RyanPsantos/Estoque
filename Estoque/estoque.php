@@ -44,20 +44,18 @@ if ($acao === 'adicionar') {
     header('Location: estoque.php');
     exit();
 } elseif ($acao === 'editar') {
-    if ($id !== null) {
+    if ($id = intval($_GET['id'])) {
         $produto = $_POST['produto'];
         $preco = $_POST['preco'];
         $tipo = $_POST['tipo'];
-        editarEstoque($id, $produto, $preco, $tipo);
+        //editarEstoque($id, $produto, $preco, $tipo);
         header("Location: editaestoque.php?id=$id&produto=" . urlencode($produto) . "&preco=" . urlencode($preco) . "&tipo=" . urlencode($tipo));
         exit();
     }
 } elseif ($acao === 'excluir') {
-    if ($id !== null) {
         excluirEstoque($id);
         header('Location: estoque.php');
         exit();
-    }
 }
 
 $estoque = getEstoque();
@@ -112,8 +110,8 @@ $estoque = getEstoque();
         <td><?php echo $item['Preco']; ?></td>
         <td><?php echo $item['Tipo']; ?></td>
         <td>
-            <a href="?acao=editar&id=<?php echo urlencode($item['Id']); ?>&produto=<?php echo urlencode($item['Produto']); ?>&preco=<?php echo urlencode($item['Preco']); ?>&tipo=<?php echo urlencode($item['Tipo']); ?>" class="btn btn-primary">Editar</a>
-            <a href="?acao=excluir&id=<?php echo urlencode($item['Id']); ?>" class="btn btn-danger">Excluir</a>
+            <a href="?acao=editar&id=<?php echo ($item['Id']); ?>&produto=<?php echo urlencode($item['Produto']); ?>&preco=<?php echo urlencode($item['Preco']); ?>&tipo=<?php echo urlencode($item['Tipo']); ?>" class="btn btn-primary">Editar</a>
+            <a href="?acao=excluir&id=<?php echo ($item['Id']); ?>" class="btn btn-danger">Excluir</a>
         </td>
     </tr>
 <?php endforeach; ?>
