@@ -1,6 +1,6 @@
 <?php
 $bd = new mysqli('localhost', 'root', '', 'estoque');
-
+//TUDO CULPA DO TOMATE
 if ($bd->connect_error) {
     echo "Erro: Falha ao conectar ao banco de dados. " . $bd->connect_error;
     exit();

@@ -1,6 +1,6 @@
 <?php
 $bd = new mysqli('localhost', 'root', '', 'estoque');
-
+//TUDO CULPA DO TOMATE
 function getEstoque() {
     global $bd;
     $sql = "SELECT * FROM controle_estoque";
