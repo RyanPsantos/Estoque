@@ -27,7 +27,6 @@ SET time_zone = "+00:00";
 -- Estrutura para tabela `controle_estoque`
 --
 
---TUDO CULPA DO TOMATE!!!!!!!!!!!!!!!!!!!!!!!
 
 CREATE DATABASE estoque;
 USE estoque;
