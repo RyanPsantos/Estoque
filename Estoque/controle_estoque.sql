@@ -27,6 +27,11 @@ SET time_zone = "+00:00";
 -- Estrutura para tabela `controle_estoque`
 --
 
+--TUDO CULPA DO TOMATE!!!!!!!!!!!!!!!!!!!!!!!
+
+CREATE DATABASE estoque;
+USE estoque;
+
 CREATE TABLE `controle_estoque` (
   `Id` int(11) NOT NULL,
   `Produto` varchar(200) NOT NULL,
