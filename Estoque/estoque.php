@@ -111,8 +111,10 @@ $estoque = getEstoque();
         <td>
             <a href="?acao=editar&id=<?php echo ($item['Id']); ?>&produto=<?php echo urlencode($item['Produto']); 
             ?>&preco=<?php echo urlencode($item['Preco']); ?>&tipo=<?php echo urlencode($item['Tipo']); ?>
-            " class="btn btn-primary">Editar</a>
-            <a href="?acao=excluir&id=<?php echo ($item['Id']); ?>" class="btn btn-danger">Excluir</a>
+            " id="editar"><img  src="css/btn_editar.png" alt="Editar" id="editar"></a>
+            <a href="?acao=excluir&id=<?php echo ($item['Id']); ?>" ><img  src="css/btn_excluir.png" alt="Excluir" id="excluir"></a>
+
+
         </td>
     </tr>
 <?php endforeach; ?>

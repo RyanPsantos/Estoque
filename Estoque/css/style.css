@@ -30,9 +30,17 @@ body{
     margin-top: 6%;
 }
 .table{
-
     margin-right: 2%;
 }
 #style_table{
     overflow-x:auto;
+}
+#editar{
+    width: 10%;
+    height: 10%;
+}
+#excluir{
+    width: 10%;
+    height: 10%;
+    margin-left: 2%;
 }
