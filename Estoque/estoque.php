@@ -70,7 +70,7 @@ $estoque = getEstoque();
 </head>
 <body>
 <div class="conteudo">
-    <h1 class="text-info bg-dark">Controle de Estoque</h1>
+    <h1 id="titulo">Controle de Estoque</h1>
     
     <form action="?acao=adicionar" method="post" novalidate="novalidate">
         <div class="form-floating mb-3">
@@ -94,11 +94,11 @@ $estoque = getEstoque();
     <table class="table">
         <thead>
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Produto</th>
-                <th scope="col">Preço</th>
-                <th scope="col">Tipo</th>
-                <th scope="col">Editar</th>
+                <th scope="col" id="titulos_colunas">ID</th>
+                <th scope="col" id="titulos_colunas">Produto</th>
+                <th scope="col" id="titulos_colunas">Preço</th>
+                <th scope="col" id="titulos_colunas">Tipo</th>
+                <th scope="col" id="titulos_colunas">Editar</th>
             </tr>
         </thead>
         <tbody>

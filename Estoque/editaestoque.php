@@ -118,7 +118,7 @@ $bd->close();
 </head>
 <body>
     <div class="conteudo">
-        <h1 class="text-info bg-dark">Editar Produto</h1>
+        <h1 id="titulo">Editar Produto</h1>
         <form method="post" novalidate="novalidate">
             <input type="hidden" name="id" id="id" value="<?php echo $id;?>">
             <div class="form-floating mb-3">
@@ -152,7 +152,7 @@ $bd->close();
                 <label for="novo_tipo" class="lbl_titulo">Tipo:</label>
             </div>
             <div class="col-md-4">
-                <button type="submit" class="btn btn-primary">Atualizar</button>
+                <button type="submit" class="btn btn-primary" id="btn_atualizar">Atualizar</button>
             </div>
         </form>
     </div>
