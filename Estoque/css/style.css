@@ -39,6 +39,7 @@ body{
 #editar{
     width: 10%;
     height: 10%;
+    
 }
 #excluir{
     width: 10%;
@@ -48,4 +49,7 @@ body{
 #titulos_colunas{
     background-color: var(--cinza);
     color: whitesmoke;
+}
+#editar:hover, #excluir:hover {
+    filter: brightness(.5);
 }
